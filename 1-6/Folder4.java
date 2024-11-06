@@ -114,7 +114,6 @@ class Folder4 {
         V14(n - 1, A, C, B);
         System.out.println("Move " + n + " from " + A + " to " + C);
         V14(n - 1, B, A, C);
-
     }
 
     public static int V15(int n, int k) {
