@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 class Folder5 {
     public static int V7(int arr[]) {
         int res = 0;
@@ -269,17 +271,148 @@ class Folder5 {
     }
 
     public static int V27(int arr[], int k) {
-        int ans=0;
-        int res=0;
-        for(int i=0;i<k;i++){
-            ans+=arr[i];
-            res=Math.max(res,ans);
+        int ans = 0;
+        int res = 0;
+        for (int i = 0; i < k; i++) {
+            ans += arr[i];
+            res = Math.max(res, ans);
         }
-        for(int i=k;i<arr.length;i++){
-            ans+=arr[i]-arr[i-k];
-            res=Math.max(res,ans);
+        for (int i = k; i < arr.length; i++) {
+            ans += arr[i] - arr[i - k];
+            res = Math.max(res, ans);
         }
         return res;
+    }
+
+    public static int V28(int[] arr, int j, int k) {
+        if (j < 0 || k >= arr.length)
+            return -1;
+        int prefix[] = new int[arr.length];
+        prefix[0] = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            prefix[i] = arr[i] + prefix[i - 1];
+        }
+        if (j > 0) {
+            return prefix[k] - prefix[j - 1];
+        } else {
+
+            return prefix[k];
+        }
+
+    }
+
+    public static boolean V28_2(int arr[]) {
+        // lsum rsum prefixes take O2n extra space
+        int arrSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            arrSum += arr[i];
+        }
+        int lSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (lSum == arrSum - arr[i]) {
+                return true;
+            }
+            lSum += arr[i];
+            arrSum -= arr[i];
+        }
+        return false;
+    }
+
+    public static int V29(int[] L, int[] R) {
+        int arr[] = new int[100];
+        for (int i = 0; i < L.length; i++) {
+            arr[L[i]]++;
+            arr[R[i] + 1]--;
+
+        }
+        int preSum = arr[0];
+        int res = 0;
+        for (int i = 1; i < arr.length; i++) {
+            arr[i] += arr[i - 1];
+            if (preSum < arr[i]) {
+                preSum = arr[i];
+                res = i;
+            }
+        }
+        System.out.println(preSum);
+        return res;
+    }
+
+    public static boolean V30(int[] arr) {
+        // whether there are 3 equal parts or not
+        int arrSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            arrSum += arr[i];
+        }
+        if (arrSum == 0)
+            return true;
+        int sum = 0;
+        int part = -1;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            arrSum -= arr[i];
+            if (sum == arrSum / 2) {
+                part = i;
+                break;
+            }
+        }
+        if (part == -1)
+            return false;
+        int sum2 = 0;
+        for (int i = part + 1; i < arr.length; i++) {
+            sum2 += arr[i];
+            arrSum -= arr[i];
+            if (sum2 == arrSum)
+                return true;
+        }
+        return false;
+    }
+
+    public static int V32(int[] nums) {
+        // maximum subarray of equal 1's and 0's
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0)
+                nums[i] = -1;
+            else
+                nums[i] = 1;
+        }
+        HashMap<Integer, Integer> h = new HashMap<>();
+        int sum = 0;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            if (sum == 0) {
+                ans = Math.max(i + 1, ans);
+            }
+            if (h.containsKey(sum)) {
+                ans = Math.max(i - h.get(sum), ans);
+            } else {
+                h.put(sum, i);
+            }
+        }
+        return ans;
+
+    }
+
+    public static int V33(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer, Integer> h = new HashMap<>();
+        int sum = 0;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            if (sum == 0) {
+                ans = Math.max(i + 1, ans);
+            }
+            if (h.containsKey(sum)) {
+                ans = Math.max(i - h.get(sum), ans);
+            } else {
+                h.put(sum, i);
+            }
+        }
+        return ans;
+
     }
 
     public static void main(String[] args) {
@@ -370,8 +503,27 @@ class Folder5 {
         // V26(arr);
 
         // v27
-        int arr[] = { 1, 8, 30, -5, 20, 7 };
-        int ans = V27(arr, 3);
+        // int arr[] = { 1, 8, 30, -5, 20, 7 };
+        // int ans = V27(arr, 3);
+
+        // V28--prefix sum
+        // int arr[] = { 3, 4, 8,6, 9, 10, 5 };
+        // int ans = V28(arr, 3, 6);
+        // boolean ans=V28_2(arr);
+
+        // V29--range overlap
+        // int L[] = { 1, 2, 3 };
+        // int R[] = { 3, 5, 7 };
+        // int ans= V29(L, R);
+
+        // V30-- homework
+        // int arr[] = { 4, 4, -8, 6, 10, 8, 8 };
+        // boolean ans = V30(arr);
+        // boolean ans = V31(arr);
+
+        int arr[] = { 1, -1, 1, -1, 1, -1, 1, 1, 1, 1 };
+        // int ans = V32(arr);
+        int ans = V33(arr);
 
         System.out.println(ans);
     }
