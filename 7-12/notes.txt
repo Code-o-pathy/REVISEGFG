@@ -1,0 +1,25 @@
+sorting in java
+--java uses dual pivot QuickSort for array of primitives
+--java uses mergesort adaptation of Timsort for array of non-primitives
+
+stability in sorting
+--if the order of elements of collections are maintained its stable
+--for eg: {cs,101}{ecs,201}{cs,102}{ecs,202}{cs,103}
+--after sort:{cs,101}{cs,102}{cs,103}{ecs,201}{ecs,202}
+
+sorting algos
+--stable 
+----bubble,insertion,mergesort
+--unstable 
+----Selection, quick,heap
+
+--selection sort is very optimal because it does less memory writes compared to merge,insertion,bubble,etc
+--however cycle sort is the one which does least memory writes
+
+--merge sort
+--divide and conquer
+--divides array into two parts,sorts them,then merges two parts
+--stable
+--nlogn time and n aux space
+--linked lists can be done with O(1) aux space
+--quciksort outperforms it for general arrays
