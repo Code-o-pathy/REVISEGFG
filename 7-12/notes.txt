@@ -23,3 +23,53 @@ sorting algos
 --nlogn time and n aux space
 --linked lists can be done with O(1) aux space
 --quciksort outperforms it for general arrays
+
+--cycle sort
+--least memory writes;
+--unstable
+
+--bucket sort
+O(n) if k approx n;
+else nsquare
+
+--counting sort
+theta n+k
+aux space theta n+k
+
+--radix sort
+theta b8(n+k);
+b=no. of digits in max number
+aux space =theta n+k
+
+--heap sort
+Onlogn
+
+
+--overview of sorting algorithm
+
+--binary array
+---partition of quicksort (lomito, hoare)
+
+--array with 3 values
+---partition of quicksort (lomito, hoare)
+
+--array of size n and small ranged values
+----counting sort
+
+--array of size n and nsquare to ncube  ranged values
+--radix sort 
+
+--unifromly distributed across a range 
+---bucket sort
+
+--memory writes are costly
+----cycle sort,selection sort
+
+--adjacent swaps allowed
+----bubble sort
+
+--array size is small
+---insertion sort
+
+--when less extra memory
+----shell sort better in time compared to selection,bubble,insertion

@@ -143,7 +143,7 @@ class Folder7_1 {
             }
 
         } else {
-            while (a2 < n2) {
+            while (a1 < n1) {
                 ans[i] = arr1[a1];
                 a1++;
                 i++;
@@ -153,6 +153,55 @@ class Folder7_1 {
         return ans;
     }
 
+    public static void V11(int[] arr, int low, int mid, int high) {
+        // this solution is theta n;
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+        int left[] = new int[n1];
+        int right[] = new int[n2];
+        for (int i = 0; i < n1; i++) {
+            left[i] = arr[low + i];
+        }
+        for (int i = 0; i < n2; i++) {
+            right[i] = arr[mid+1+i];
+        }
+        int i = 0;
+        int j = 0;
+        int k = low;
+        // whole V11 function
+        while (i < n1 && j < n2) {
+            if (left[i] <= right[j]) {
+                arr[k] = left[i];
+                k++;
+                i++;
+            } else {
+                arr[k] = right[j];
+                k++;
+                j++;
+            }
+        }
+        while (i < n1) {
+            arr[k] = left[i];
+            k++;
+            i++;
+        }
+        while (j < n2) {
+            arr[k] = right[j];
+            k++;
+            j++;
+        }
+
+    }
+
+    public static void V12(int arr[], int low, int high) {
+        if (high > low) {
+            int mid = (low + ((high - low) / 2));
+            V12(arr, low, mid);
+            V12(arr, mid + 1, high);
+            V11(arr, low, mid, high);
+        }
+    }
+
     public static void main(String args[]) {
         // v3 arrays.sort;
         // V3();
@@ -160,8 +209,8 @@ class Folder7_1 {
         // V4 collections.sort;
         // V4();
 
-        // int arr[] = { 9, 3, 2, 3, 4 };
-
+        // int arr[] = { 2,4,5,7,3,6,8 };
+        int arr[] = { 5,1,52,21 };
         // V6 bubble sort
         // V6(arr);
 
@@ -172,12 +221,20 @@ class Folder7_1 {
         // V8(arr);
 
         // V10 merge two sorted arrays
-        int arr1[] = { 1, 3, 5, 7, 9 };
-        int arr2[] = { 2, 4, 6, 8, 10 };
-        int arr[] = V10(arr1, arr2);
+        // int arr1[] = { 1, 4, 5, 7, 9 };
+        // int arr2[] = { 2,3, 6, 8, 10 };
+        // int arr[] = V10(arr1, arr2);
 
-        for (int i : arr) {
-            System.out.println(i);
+        // V11 merge function
+        // V11(arr, 0, 3, 6);
+
+        // V12 merge sort
+        V12(arr, 0, 3);
+
+        
+        for(int i=0;i<arr.length;i++){
+            System.out.println(arr[i]);
+            
         }
 
     }
